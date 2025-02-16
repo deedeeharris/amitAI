@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>יצירת מלווה חדש - מחולל מלווי למידה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/variables.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/create-bot.css">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <h1>מחולל מלווי למידה - רשת אמית</h1>
+            <nav class="main-nav">
+                <div class="nav-buttons">
+                    <a href="../index.html" class="nav-button">
+                        <i class="fas fa-home"></i>
+                        דף הבית
+                    </a>
+                    <a href="library.html" class="nav-button">
+                        <i class="fas fa-book-open"></i>
+                        ספריית מלווים
+                    </a>
+                    <a href="my-bots.html" class="nav-button">
+                        <i class="fas fa-robot"></i>
+                        המלווים שלי
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="creation-wizard">
+                <!-- Step Indicators -->
+                <div class="step-indicators">
+                    <div class="step active" data-step="1">
+                        <span class="step-number">1</span>
+                        <span class="step-title">פרטים בסיסיים</span>
+                    </div>
+                    <div class="step" data-step="2">
+                        <span class="step-number">2</span>
+                        <span class="step-title">אישיות המלווה</span>
+                    </div>
+                    <div class="step" data-step="3">
+                        <span class="step-number">3</span>
+                        <span class="step-title">מקורות מידע</span>
+                    </div>
+                    <div class="step" data-step="4">
+                        <span class="step-number">4</span>
+                        <span class="step-title">בדיקה ותצוגה מקדימה</span>
+                    </div>
+                    <div class="step" data-step="5">
+                        <span class="step-number">5</span>
+                        <span class="step-title">הגדרות והפצה</span>
+                    </div>
+                </div>
+
+                <!-- Step Content -->
+                <div class="step-content">
+                    <!-- Step 1: Basic Information -->
+                    <div class="step-content-item active" data-step="1">
+                        <div class="form-section">
+                            <h2>פרטים בסיסיים</h2>
+                            <div class="form-group">
+                                <label for="bot-name">שם המלווה</label>
+                                <input type="text" id="bot-name" name="bot-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject-area">תחום לימוד</label>
+                                <select id="subject-area" name="subject-area" required>
+                                    <option value="">בחר תחום</option>
+                                    <option value="math">מתמטיקה</option>
+                                    <option value="science">מדעים</option>
+                                    <option value="history">היסטוריה</option>
+                                    <option value="literature">ספרות</option>
+                                    <option value="english">אנגלית</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="grade-level">שכבת גיל</label>
+                                <select id="grade-level" name="grade-level" required>
+                                    <option value="">בחר שכבה</option>
+                                    <option value="elementary">יסודי</option>
+                                    <option value="middle">חטיבת ביניים</option>
+                                    <option value="high">תיכון</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="bot-description">תיאור המלווה</label>
+                                <textarea id="bot-description" name="bot-description" rows="4" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Personality -->
+                    <div class="step-content-item" data-step="2">
+                        <div class="form-section">
+                            <h2>אישיות המלווה</h2>
+                            <div class="personality-settings">
+                                <div class="form-group">
+                                    <label for="voice-selection">בחירת קול</label>
+                                    <select id="voice-selection" name="voice-selection">
+                                        <option value="">בחר קול</option>
+                                        <option value="male1">קול גברי 1</option>
+                                        <option value="male2">קול גברי 2</option>
+                                        <option value="female1">קול נשי 1</option>
+                                        <option value="female2">קול נשי 2</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="temperature">
+                                        טמפרטורה
+                                        <span class="info-tooltip" data-tooltip="ערך נמוך = תשובות ממוקדות יותר">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                    </label>
+                                    <div class="temperature-control">
+                                        <input type="range" id="temperature" name="temperature" 
+                                               min="0" max="1" step="0.1" value="0.7">
+                                        <span class="temperature-value">0.7</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="behavior-params">פרמטרי התנהגות</label>
+                                    <div class="behavior-params">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="behavior" value="friendly" checked>
+                                            ידידותי
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="behavior" value="professional">
+                                            מקצועי
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="behavior" value="encouraging">
+                                            מעודד
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Knowledge Base -->
+                    <div class="step-content-item" data-step="3">
+                        <div class="form-section">
+                            <h2>מקורות מידע</h2>
+                            <div class="knowledge-base">
+                                <div class="upload-section" id="file-upload">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>גרור קבצים לכאן או לחץ להעלאה</p>
+                                    <input type="file" multiple hidden>
+                                </div>
+                                <div class="form-group">
+                                    <label for="url-import">ייבוא מ-URL</label>
+                                    <div class="url-input">
+                                        <input type="url" id="url-import" placeholder="הכנס כתובת URL">
+                                        <button class="add-url">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="manual-input">הזנה ידנית</label>
+                                    <textarea id="manual-input" rows="4" 
+                                              placeholder="הכנס טקסט או תוכן"></textarea>
+                                </div>
+                            </div>
+                            <div class="sources-list">
+                                <!-- Sources will be listed here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Testing & Preview -->
+                    <div class="step-content-item" data-step="4">
+                        <div class="form-section">
+                            <h2>בדיקה ותצוגה מקדימה</h2>
+                            <div class="preview-section">
+                                <div class="preview-header">
+                                    <span>תצוגה מקדימה של שיחה</span>
+                                    <button class="reset-chat">
+                                        <i class="fas fa-redo"></i>
+                                        אפס שיחה
+                                    </button>
+                                </div>
+                                <div class="chat-preview" id="chat-preview">
+                                    <!-- Chat messages will appear here -->
+                                </div>
+                                <div class="chat-input">
+                                    <input type="text" placeholder="הקלד הודעת בדיקה...">
+                                    <button class="send-message">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="settings-adjustment">
+                                <h3>כוונון הגדרות</h3>
+                                <div class="adjustment-controls">
+                                    <!-- Dynamic settings adjustments -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Deployment -->
+                    <div class="step-content-item" data-step="5">
+                        <div class="form-section">
+                            <h2>הגדרות והפצה</h2>
+                            <div class="deployment-settings">
+                                <div class="form-group">
+                                    <label>הגדרות גישה</label>
+                                    <div class="access-controls">
+                                        <label class="radio-label">
+                                            <input type="radio" name="access" value="public" checked>
+                                            ציבורי
+                                        </label>
+                                        <label class="radio-label">
+                                            <input type="radio" name="access" value="private">
+                                            פרטי
+                                        </label>
+                                        <label class="radio-label">
+                                            <input type="radio" name="access" value="restricted">
+                                            מוגבל
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>אפשרויות שיתוף</label>
+                                    <div class="sharing-options">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="sharing" value="link">
+                                            שיתוף באמצעות קישור
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="sharing" value="embed">
+                                            הטמעה באתר
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="sharing" value="api">
+                                            גישה דרך API
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>קוד הטמעה</label>
+                                    <div class="integration-code">
+                                        <pre><code id="embed-code"><!-- Integration code will be generated here --></code></pre>
+                                        <button class="copy-code">
+                                            <i class="fas fa-copy"></i>
+                                            העתק קוד
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="step-navigation">
+                    <button class="prev-step secondary" disabled>
+                        <i class="fas fa-arrow-right"></i>
+                        הקודם
+                    </button>
+                    <button class="next-step primary">
+                        הבא
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/common/config.js"></script>
+    <script src="../js/common/api.js"></script>
+    <script src="../js/common/utils.js"></script>
+    <script src="../js/components/steps.js"></script>
+    <script src="../js/components/preview.js"></script>
+    <script src="../js/components/file-upload.js"></script>
+    <script src="../js/components/form-validation.js"></script>
+    <script src="../js/pages/create-bot.js"></script>
+</body>
+</html>
