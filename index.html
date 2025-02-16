@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחולל מלווי למידה - רשת אמית</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="container">
+        <header class="main-header">
+            <h1>מחולל מלווי למידה - רשת אמית</h1>
+            <nav class="main-nav">
+                <div class="nav-buttons">
+                    <button class="nav-button active" data-screen="library">
+                        <i class="fas fa-book-open"></i>
+                        ספריית מלווי למידה
+                    </button>
+                    <button class="nav-button" data-screen="my-bots">
+                        <i class="fas fa-robot"></i>
+                        המלווים שלי
+                    </button>
+                    <button class="nav-button primary" data-screen="create-bot">
+                        <i class="fas fa-plus-circle"></i>
+                        יצירת מלווה למידה חדש
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Screens Container -->
+        <main class="screens-container">
+            <!-- Bot Library Screen -->
+            <section id="library-screen" class="screen active">
+                <div class="search-bar">
+                    <input type="text" placeholder="חיפוש מלווים...">
+                    <button class="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="filters">
+                    <select class="filter-select">
+                        <option value="">כל הנושאים</option>
+                        <option value="math">מתמטיקה</option>
+                        <option value="science">מדעים</option>
+                        <option value="history">היסטוריה</option>
+                    </select>
+                    <select class="filter-select">
+                        <option value="">כל השפות</option>
+                        <option value="he">עברית</option>
+                        <option value="en">אנגלית</option>
+                    </select>
+                </div>
+                <div class="bots-grid">
+                    <!-- Example Bot Card -->
+                    <div class="bot-card">
+                        <div class="bot-image">
+                            <img src="https://via.placeholder.com/150" alt="Bot Image">
+                        </div>
+                        <div class="bot-info">
+                            <h3>מלווה למידה למתמטיקה</h3>
+                            <p>עוזר בפתרון תרגילים ומסביר מושגים במתמטיקה</p>
+                            <div class="bot-tags">
+                                <span class="tag">מתמטיקה</span>
+                                <span class="tag">כיתה י</span>
+                            </div>
+                        </div>
+                        <div class="bot-actions">
+                            <button class="action-button">
+                                <i class="fas fa-play"></i>
+                                התחל שיחה
+                            </button>
+                            <button class="action-button secondary">
+                                <i class="fas fa-info-circle"></i>
+                                פרטים נוספים
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Bots Screen -->
+            <section id="my-bots-screen" class="screen">
+                <div class="my-bots-list">
+                    <!-- Will be populated dynamically -->
+                </div>
+            </section>
+
+            <!-- Create Bot Screen -->
+            <section id="create-bot-screen" class="screen">
+                <div class="creation-steps">
+                    <div class="step-indicators">
+                        <div class="step active">
+                            <span class="step-number">1</span>
+                            <span class="step-title">פרטים בסיסיים</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <span class="step-title">מקורות מידע</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <span class="step-title">תרחיש ופרומפט</span>
+                        </div>
+                    </div>
+                    
+                    <div class="step-content">
+                        <div class="basic-info-step">
+                            <div class="form-group">
+                                <label for="bot-name">שם המלווה</label>
+                                <input type="text" id="bot-name" placeholder="תן שם למלווה שלך">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="bot-language">שפה</label>
+                                <select id="bot-language">
+                                    <option value="he">עברית</option>
+                                    <option value="en">אנגלית</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="bot-voice">קול</label>
+                                <select id="bot-voice">
+                                    <option value="">בחר קול</option>
+                                    <!-- Will be populated based on language -->
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="temperature">
+                                    טמפרטורה
+                                    <span class="info-tooltip" data-tooltip="ערך נמוך יותר = תשובות יותר ממוקדות">
+                                        <i class="fas fa-info-circle"></i>
+                                    </span>
+                                </label>
+                                <div class="temperature-control">
+                                    <input type="range" id="temperature" min="0" max="0.5" step="0.1" value="0.2">
+                                    <span class="temperature-value">0.2</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="image-prompt">תיאור תמונה למלווה</label>
+                                <div class="image-generation">
+                                    <input type="text" id="image-prompt" placeholder="תאר את המלווה שלך...">
+                                    <button id="generate-image" class="primary">
+                                        <i class="fas fa-wand-magic-sparkles"></i>
+                                        צור תמונה
+                                    </button>
+                                </div>
+                                <div id="image-preview" class="hidden">
+                                    <img src="" alt="תצוגה מקדימה של תמונת המלווה">
+                                </div>
+                            </div>
+                            
+                            <div class="step-actions">
+                                <button class="next-step primary">
+                                    המשך לשלב הבא
+                                    <i class="fas fa-arrow-left"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Bot Preview -->
+    <div id="bot-preview" class="bot-preview minimized">
+        <div class="preview-header">
+            <span class="preview-title">תצוגה מקדימה</span>
+            <div class="preview-controls">
+                <button class="minimize-preview">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="preview-content">
+            <div class="chat-messages">
+                <!-- Chat messages will appear here -->
+            </div>
+            <div class="chat-input">
+                <input type="text" placeholder="הקלד הודעה...">
+                <button class="send-message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/autosave.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+</html>
