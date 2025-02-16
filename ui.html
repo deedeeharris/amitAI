@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחולל מלווי למידה חינוכיים - רשת אמית</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* --- CSS --- */
+        body {
+            font-family: 'Assistant', sans-serif;
+            direction: rtl;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+            color: #2980b9;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5em;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1em;
+        }
+
+        .step {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #d1e0e8;
+            border-radius: 8px;
+            background-color: #fff;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .step:hover{
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .step h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8em;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        input[type="text"],
+        input[type="url"],
+        input[type="file"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #b0c4de;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="url"]:focus,
+        input[type="file"]:focus, /* Added focus for file input */
+        textarea:focus,
+        select:focus {
+            border-color: #2980b9;
+            outline: none;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-right: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        /* Image Selection */
+        #bot-image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        /* Sources Library (Modal) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #sources-search-modal {
+            width: calc(100% - 20px);
+            margin-bottom: 10px;
+        }
+
+        #sources-list-modal {
+            list-style: none;
+            padding: 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        #sources-list-modal li {
+            padding: 8px 12px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #sources-list-modal li:hover {
+            background-color: #f0f0f0;
+        }
+        #sources-list-modal li button {
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+
+
+        /* Added Links & Sources */
+        #added-sources { /* Renamed from #added-links */
+            list-style: none;
+            padding: 0;
+        }
+        #added-sources li {
+            background-color: #e8f0fe;
+            padding: 8px 12px;
+            margin-bottom: 6px;
+            border-radius: 4px;
+            border: 1px solid #b0c4de;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #added-sources li button{
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            background-color: #e74c3c;
+            margin-left: 10px; /* Add margin */
+        }
+        #added-sources li button:hover{
+            background-color: #c0392b;
+        }
+
+        /* Prompt Generation */
+        #generated-prompt-container {
+            margin-top: 12px;
+        }
+
+        #generated-prompt {
+            width: 100%;
+            min-height: 150px;
+            resize: both;
+            font-size: 1rem;
+            overflow: auto;
+        }
+
+        /* Preview Area */
+        #preview-area {
+            border: 1px solid #d1e0e8;
+            padding: 15px;
+            margin-bottom: 15px;
+            min-height: 120px;
+            border-radius: 8px;
+            background-color: #f9fafb;
+            display: none;
+        }
+
+        /* Bot ID Display */
+        #bot-id-display {
+            font-weight: bold;
+            display: none;
+            margin-top: 10px;
+        }
+
+        /* Info Icon (i) */
+        .info-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background-color: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: none;
+            z-index: 10;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+
+        /* Spinner */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .step {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .step h3 {
+                font-size: 1.2rem;
+            }
+
+            input[type="text"],
+            input[type="url"],
+            input[type="file"],
+            textarea,
+            select,
+            button {
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+            }
+            button{
+                display: block;
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .modal-content{
+                margin: 20% auto;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>מחולל מלווי למידה חינוכיים - רשת אמית</h1>
+
+        <section id="bot-creation">
+            <h2>יצירת מלווה למידה חדש</h2>
+
+            <div class="step" id="step-1">
+                <h3>
+                    <span>1. תמונת המלווה</span>
+                    <span class="info-icon" data-tooltip="הקלד תיאור לתמונה, והמערכת תיצור תמונה מתאימה.">i</span>
+                </h3>
+                <div class="image-selection">
+                    <label for="image-text">תיאור התמונה:</label>
+                    <input type="text" id="image-text" placeholder="לדוגמה: רובוט חייכן עם משקפיים">
+                    <button id="generate-image">צור תמונה</button> <span class="spinner" id="image-spinner"></span>
+                    <img id="bot-image-preview" src="" alt="תצוגה מקדימה של תמונת המלווה" style="display: none;">
+                </div>
+            </div>
+
+            <div class="step" id="step-2">
+                <h3>
+                    <span>2. קול המלווה</span>
+                    <span class="info-icon" data-tooltip="בחר קול מתוך רשימה של קולות מגוונים, ובחר את השפה שבה המלווה ידבר.">i</span>
+                </h3>
+                <div class="voice-selection">
+                    <label for="voice-select">בחירת קול:</label>
+                    <select id="voice-select">
+                        <option value="">-- בחר קול --</option>
+                        <option value="voice1">קול נשי 1 (עברית)</option>
+                        <option value="voice2">קול גברי 2 (עברית)</option>
+                        <option value="voice3">קול נשי 3 (אנגלית)</option>
+                        <option value="voice4">קול גברי 4 (אנגלית)</option>
+                        </select>
+                    <label for="voice-language">שפה:</label>
+                    <select id="voice-language">
+                        <option value="he">עברית</option>
+                        <option value="en">אנגלית</option>
+                        </select>
+                </div>
+            </div>
+
+            <div class="step" id="step-3">
+                <h3>
+                    <span>3. מקורות מידע</span>
+                    <span class="info-icon" data-tooltip="הוסף מקורות מידע: חפש בספריית המקורות, הוסף קישורים, או העלה קובץ.">i</span>
+                </h3>
+                <div class="data-sources">
+                    <button id="open-sources-library">פתח ספריית מקורות</button>
+                    <input type="file" id="upload-source" accept=".pdf,.doc,.docx,.txt" style="display: none;">
+                    <button id="upload-source-button">העלה קובץ מקור</button>
+
+
+                    <div class="external-links">
+                        <label for="youtube-link">הוסף קישור ל-YouTube:</label>
+                        <input type="url" id="youtube-link" placeholder="הדבק קישור ל-YouTube">
+                        <button id="add-youtube-link">הוסף</button>
+                        <label for="website-link">הוסף קישור לאתר:</label>
+                        <input type="url" id="website-link" placeholder="הדבק קישור לאתר">
+                        <button id="add-website-link">הוסף</button>
+                        <h4>מקורות נבחרים:</h4>
+                        <ul id="added-sources">
+                            <!-- Mock added sources -->
+                            <li data-source-id="mock1">ויקיפדיה - היסטוריה של המאה ה-20 <button><i class="fas fa-trash-alt"></i></button></li>
+                            <li data-source-id="mock2">ספר הלימוד - מתמטיקה לכיתה י' <button><i class="fas fa-trash-alt"></i></button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step" id="step-4">
+                <h3>
+                    <span>4. הנחיות מערכת (System Prompt)</span>
+                    <span class="info-icon" data-tooltip="כתוב תיאור מפורט של תפקיד המלווה, קהל היעד שלו, והנושאים שבהם הוא יעסוק. הגדר את האישיות וההתנהגות.">i</span>
+                </h3>
+                <div class="prompt-generation">
+                    <label for="prompt-idea">רעיון המלווה (תיאור תפקידו):</label>
+                    <textarea id="prompt-idea" placeholder="לדוגמה: מלווה המסייע לתלמידי כיתה י' בהכנה לבגרות בהיסטוריה, תוך התמקדות במהפכה הצרפתית."></textarea>
+                    <button id="generate-prompt">צור הנחיה</button>  <span class="spinner" id="prompt-spinner"></span>
+                    <div id="generated-prompt-container">
+                        <label for="generated-prompt">הנחיה שנוצרה:</label>
+                        <textarea id="generated-prompt" readonly></textarea>
+                        <button id="edit-prompt">ערוך הנחיה</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="bot-preview">
+            <h2>תצוגה מקדימה של המלווה</h2>
+            <div id="preview-area">
+                </div>
+            <button id="save-bot">שמור מלווה</button>
+            <p id="bot-id-display">מזהה המלווה: <span id="bot-id"></span></p>
+        </section>
+    </div>
+
+    <!-- Sources Library Modal -->
+    <div id="sources-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h4>ספריית מקורות</h4>
+            <input type="text" id="sources-search-modal" placeholder="חיפוש מקורות...">
+            <ul id="sources-list-modal">
+                <!-- Mock sources (populated by JS) -->
+            </ul>
+        </div>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // --- Helper Functions ---
+            function showSpinner(spinnerId) {
+                document.getElementById(spinnerId).style.display = 'inline-block';
+            }
+
+            function hideSpinner(spinnerId) {
+                document.getElementById(spinnerId).style.display = 'none';
+            }
+
+            // --- Image Selection ---
+            const generateImageButton = document.getElementById('generate-image');
+            const imageText = document.getElementById('image-text');
+            const botImagePreview = document.getElementById('bot-image-preview');
+
+            generateImageButton.addEventListener('click', function() {
+                showSpinner('image-spinner');
+                const description = imageText.value;
+
+                generateMockImage(description)
+                    .then(imageUrl => {
+                        botImagePreview.src = imageUrl;
+                        botImagePreview.style.display = 'block';
+                    })
+                    .catch(error => {
+                        console.error("Image generation failed:", error);
+                        alert("אירעה שגיאה ביצירת התמונה. נסה שוב.");
+                    })
+                    .finally(() => {
+                        hideSpinner('image-spinner');
+                    });
+            });
+
+            function generateMockImage(description) {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        const imageUrl = `https://via.placeholder.com/200x200?text=${encodeURIComponent(description)}`;
+                        resolve(imageUrl);
+                    }, 1500);
+                });
+            }
+
+            // --- Voice Selection ---
+            // (Voice selection is already populated with mock data in the HTML)
+
+            // --- Data Sources ---
+            const openSourcesLibraryButton = document.getElementById('open-sources-library');
+            const sourcesModal = document.getElementById('sources-modal');
+            const closeSourcesModalButton = document.querySelector('.close-button');
+            const sourcesSearchModal = document.getElementById('sources-search-modal');
+            const sourcesListModal = document.getElementById('sources-list-modal');
+            const youtubeLinkInput = document.getElementById('youtube-link');
+            const addYoutubeLinkButton = document.getElementById('add-youtube-link');
+            const websiteLinkInput = document.getElementById('website-link');
+            const addWebsiteLinkButton = document.getElementById('add-website-link');
+            const addedSourcesList = document.getElementById('added-sources'); // Corrected ID
+            const uploadSourceInput = document.getElementById('upload-source');
+            const uploadSourceButton = document.getElementById('upload-source-button');
+
+
+            const mockSources = [
+                { id: 'source1', title: 'ויקיפדיה - היסטוריה של המאה ה-20', url: 'https://he.wikipedia.org/wiki/%D7%94%D7%99%D7%A1%D7%98%D7%95%D7%A8%D7%99%D7%94_%D7%A9%D7%9C_%D7%94%D7%9E%D7%90%D7%94_%D7%94-20' },
+                { id: 'source2', title: 'ספר הלימוד - מתמטיקה לכיתה י', url: 'https://example.com/textbook-math-10' },
+                { id: 'source3', title: 'מאמרים בנושא בינה מלאכותית', url: 'https://example.com/ai-articles' },
+                { id: 'source4', title: 'האנציקלופדיה העברית', url:'https://www.hebrew-encyclopedia.com/'},
+                { id: 'source5', title: 'אתר מטח', url: 'https://www.cet.ac.il/'}
+            ];
+
+            function populateSourcesModal(sources) {
+                sourcesListModal.innerHTML = '';
+                sources.forEach(source => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = source.title;
+                    const addButton = document.createElement('button');
+                    addButton.textContent = 'הוסף';
+                    addButton.addEventListener('click', () => addSourceToList(source));
+                    listItem.appendChild(addButton);
+                    sourcesListModal.appendChild(listItem);
+                });
+            }
+
+            function addSourceToList(source) {
+                if (Array.from(addedSourcesList.children).some(li => li.dataset.sourceId === source.id)) {
+                    alert("מקור זה כבר נוסף.");
+                    return;
+                }
+
+                const listItem = document.createElement('li');
+                listItem.textContent = source.title;
+                listItem.dataset.sourceId = source.id;
+
+                const removeButton = document.createElement('button');
+                removeButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
+                removeButton.addEventListener('click', () => {
+                    listItem.remove();
+                });
+
+                listItem.appendChild(removeButton);
+                addedSourcesList.appendChild(listItem);
+                closeModal();
+            }
+
+            // --- File Upload ---
+            uploadSourceButton.addEventListener('click', () => {
+                uploadSourceInput.click(); // Trigger file input
+            });
+
+            uploadSourceInput.addEventListener('change', handleFileUpload);
+
+            function handleFileUpload(event)
