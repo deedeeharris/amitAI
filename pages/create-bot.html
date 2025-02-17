@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>יצירת מלווה חדש - מחולל מלווי למידה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/create-bot.css">
+
+    <link rel="stylesheet" href="../styles/components/data-sources-modal.css">
+    <link rel="stylesheet" href="../styles/components/prompt-generator.css">
+    <link rel="stylesheet" href="../styles/components/bot-preview.css">
+    <link rel="stylesheet" href="../styles/components/file-upload.css">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <h1>מחולל מלווי למידה - רשת אמית</h1>
+            <nav class="main-nav">
+                <ul class="nav-buttons">
+                    <li><a href="../index.html" class="nav-button">
+                        <i class="fas fa-home"></i>
+                        דף הבית
+                    </a></li>
+                    <li><a href="library.html" class="nav-button">
+                        <i class="fas fa-book-open"></i>
+                        ספריית מלווים
+                    </a></li>
+                    <li><a href="my-bots.html" class="nav-button">
+                        <i class="fas fa-robot"></i>
+                        המלווים שלי
+                    </a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <form id="create-bot-form" class="creation-wizard">
+                <!-- Step Indicators -->
+                <div class="step-indicators">
+                    <div class="step active" data-step="1">
+                        <span class="step-number">1</span>
+                        <span class="step-title">פרטים בסיסיים</span>
+                    </div>
+                    <div class="step" data-step="2">
+                        <span class="step-number">2</span>
+                        <span class="step-title">מקורות מידע</span>
+                    </div>
+                    <div class="step" data-step="3">
+                        <span class="step-number">3</span>
+                        <span class="step-title">מראה וקול</span>
+                    </div>
+                    <div class="step" data-step="4">
+                        <span class="step-number">4</span>
+                        <span class="step-title">אופי ואישיות</span>
+                    </div>
+                    <div class="step" data-step="5">
+                        <span class="step-number">5</span>
+                        <span class="step-title">תצוגה מקדימה</span>
+                    </div>
+                </div>
+
+                <div class="wizard-content">
+                    <!-- Step 1: Basic Information -->
+                    <div class="step-content-item active" data-step="1">
+                        <div class="form-section">
+                            <h2>פרטים בסיסיים</h2>
+                            <div class="form-group">
+                                <label for="bot-name">שם המלווה</label>
+                                <input type="text" id="bot-name" name="bot-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject-area">תחום לימוד</label>
+                                <select id="subject-area" name="subject-area">
+                                    <option value="">בחר תחום</option>
+                                    <option value="math">מתמטיקה</option>
+                                    <option value="science">מדעים</option>
+                                    <option value="history">היסטוריה</option>
+                                    <option value="literature">ספרות</option>
+                                    <option value="english">אנגלית</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="grade-level">שכבת גיל</label>
+                                <select id="grade-level" name="grade-level">
+                                    <option value="">בחר שכבה</option>
+                                    <option value="elementary">יסודי</option>
+                                    <option value="middle">חטיבת ביניים</option>
+                                    <option value="high">תיכון</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="bot-description">תיאור המלווה</label>
+                                <textarea id="bot-description" name="bot-description" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Data Sources -->
+                    <div class="step-content-item" data-step="2">
+                        <div class="form-section">
+                            <h2>מקורות מידע</h2>
+                            <p class="section-description">בחר מקורות מידע עבור המלווה שלך</p>
+                            
+                            <div class="sources-actions">
+                                <button type="button" class="open-sources-library">
+                                    <i class="fas fa-book-open"></i>
+                                    ספריית מקורות
+                                </button>
+                                
+                                <div class="or-divider">או</div>
+
+                                <div class="upload-section">
+                                    <div class="file-upload-zone">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <p>גרור קבצים לכאן או לחץ להעלאה</p>
+                                        <input type="file" multiple class="file-input" accept=".pdf,.doc,.docx,.txt">
+                                    </div>
+                                    <div class="uploaded-files"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Appearance and Language -->
+                    <div class="step-content-item" data-step="3">
+                        <div class="form-section">
+                            <h2>מראה וקול</h2>
+                            <p class="section-description">הגדר את המראה והקול של המלווה שלך</p>
+
+                            <div class="appearance-section">
+                                <div class="form-group">
+                                    <label>תיאור המראה הרצוי</label>
+                                    <textarea 
+                                        class="avatar-description" 
+                                        placeholder="תאר איך תרצה שהמלווה ייראה... למשל: מורה צעירה עם משקפיים ושיער חום קצר"
+                                        rows="3"
+                                    ></textarea>
+                                </div>
+
+                                <div class="avatar-preview">
+                                    <div class="avatar-container">
+                                        <div class="avatar-placeholder">
+                                            <i class="fas fa-user"></i>
+                                            <span>התמונה תופיע כאן</span>
+                                        </div>
+                                        <img src="" alt="Avatar Preview" style="display: none;">
+                                    </div>
+                                    <div class="avatar-actions">
+                                        <button type="button" class="generate-avatar" disabled>
+                                            <i class="fas fa-magic"></i>
+                                            צור תמונה
+                                        </button>
+                                        <button type="button" class="regenerate-avatar" style="display: none">
+                                            <i class="fas fa-redo"></i>
+                                            צור תמונה חדשה
+                                        </button>
+                                        <button type="button" class="approve-avatar" style="display: none">
+                                            <i class="fas fa-check"></i>
+                                            אשר תמונה
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="language-section">
+                                <div class="form-group">
+                                    <label>שפת המלווה</label>
+                                    <select class="bot-language">
+                                        <option value="he">עברית</option>
+                                        <option value="en">אנגלית</option>
+                                        <option value="ar">ערבית</option>
+                                        <option value="ru">רוסית</option>
+                                        <option value="am">אמהרית</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="voice-section">
+                                <div class="form-group">
+                                    <label>קול המלווה</label>
+                                    <div class="voice-options">
+                                        <select class="voice-gender">
+                                            <option value="female">נקבה</option>
+                                            <option value="male">זכר</option>
+                                        </select>
+                                        <select class="voice-age">
+                                            <option value="young">צעיר/ה</option>
+                                            <option value="middle">בוגר/ת</option>
+                                            <option value="elder">מבוגר/ת</option>
+                                        </select>
+                                    </div>
+                                    <div class="voice-preview">
+                                        <button type="button" class="test-voice">
+                                            <i class="fas fa-play"></i>
+                                            נסה את הקול
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Personality (previously step 3) -->
+                    <div class="step-content-item" data-step="4">
+                        <div class="form-section">
+                            <h2>אופי ואישיות</h2>
+                            <p class="section-description">הגדר את אופי והתנהגות המלווה</p>
+
+                            <div class="personality-section">
+                                <div class="form-group">
+                                    <label>סגנון אישיות</label>
+                                    <select class="personality-style">
+                                        <option value="friendly">ידידותי ונגיש</option>
+                                        <option value="professional">מקצועי ורשמי</option>
+                                        <option value="supportive">תומך ומעודד</option>
+                                        <option value="challenging">מאתגר ודוחף קדימה</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>יצירת פרומפט</label>
+                                    <button type="button" class="open-prompt-chat">
+                                        <i class="fas fa-comments"></i>
+                                        צ'אט ליצירת פרומפט
+                                    </button>
+                                    <div class="prompt-preview">
+                                        <h4>תצוגה מקדימה של הפרומפט</h4>
+                                        <div class="prompt-content">
+                                            <!-- Prompt content will be displayed here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Preview (previously step 4) -->
+                    <div class="step-content-item" data-step="5">
+                        <div class="form-section">
+                            <h2>תצוגה מקדימה</h2>
+                            <div class="preview-pane">
+                                <div class="chat-preview">
+                                    <!-- Chat preview will be here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="step-navigation">
+                    <button type="button" class="prev-step" disabled>
+                        <i class="fas fa-arrow-right"></i>
+                        הקודם
+                    </button>
+                    <button type="button" class="next-step">
+                        הבא
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="../js/debug.js"></script>
+    <script type="module" src="../js/wizard-navigation.js"></script>
+    <script type="module" src="../js/components/steps.js"></script>
+    <script type="module" src="../js/components/file-upload.js"></script>
+    <script type="module" src="../js/components/form-validation.js"></script>
+    <script type="module" src="../js/pages/create-bot.js"></script>
+    <script type="module" src="../js/init.js"></script>
+</body>
+</html>

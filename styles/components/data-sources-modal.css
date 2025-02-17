@@ -1,0 +1,255 @@
+.data-sources-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: none;
+}
+
+.data-sources-modal .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.data-sources-modal .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.data-sources-modal .modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.data-sources-modal .modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.data-sources-modal .close-modal {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #666;
+    padding: 5px;
+}
+
+.data-sources-modal .close-modal:hover {
+    color: #333;
+}
+
+.data-sources-modal .modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.data-sources-modal .search-section {
+    margin-bottom: 20px;
+}
+
+.data-sources-modal .search-box {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.data-sources-modal .search-box i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.data-sources-modal .source-search {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.data-sources-modal .filter-tags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.data-sources-modal .filter-tag {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.data-sources-modal .filter-tag.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.data-sources-modal .sources-list {
+    display: grid;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.data-sources-modal .source-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.data-sources-modal .source-item:hover {
+    border-color: #007bff;
+    background: #f8f9ff;
+}
+
+.data-sources-modal .source-checkbox {
+    margin-left: 15px;
+}
+
+.data-sources-modal .source-checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+.data-sources-modal .source-info {
+    flex: 1;
+}
+
+.data-sources-modal .source-info h4 {
+    margin: 0 0 5px 0;
+    color: #333;
+}
+
+.data-sources-modal .source-info p {
+    margin: 0 0 8px 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.data-sources-modal .source-category {
+    display: inline-block;
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.data-sources-modal .selected-sources {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.data-sources-modal .selected-sources h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+}
+
+.data-sources-modal .selected-sources-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.data-sources-modal .selected-source {
+    display: flex;
+    align-items: center;
+    background: #f0f0f0;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.data-sources-modal .selected-source button {
+    background: none;
+    border: none;
+    margin-right: 8px;
+    cursor: pointer;
+    color: #666;
+    padding: 2px;
+}
+
+.data-sources-modal .selected-source button:hover {
+    color: #dc3545;
+}
+
+.data-sources-modal .modal-footer {
+    padding: 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.data-sources-modal .add-sources-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.data-sources-modal .add-sources-btn:hover {
+    background: #0056b3;
+}
+
+.data-sources-modal .add-sources-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.data-sources-modal .sources-count {
+    margin-right: 5px;
+    opacity: 0.8;
+}
+
+/* RTL Support */
+.data-sources-modal[dir="rtl"] .search-box i {
+    right: auto;
+    left: 12px;
+}
+
+.data-sources-modal[dir="rtl"] .source-search {
+    padding: 12px 12px 12px 40px;
+}
+
+.data-sources-modal[dir="rtl"] .source-checkbox {
+    margin-left: 0;
+    margin-right: 15px;
+}
+
+.data-sources-modal[dir="rtl"] .selected-source button {
+    margin-right: 0;
+    margin-left: 8px;
+}

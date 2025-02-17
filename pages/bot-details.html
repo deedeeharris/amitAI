@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פרטי מלווה - מחולל מלווי למידה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/bot-details.css">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <h1>מחולל מלווי למידה - רשת אמית</h1>
+            <nav class="main-nav">
+                <div class="nav-buttons">
+                    <a href="../index.html" class="nav-button">
+                        <i class="fas fa-book-open"></i>
+                        ספריית מלווי למידה
+                    </a>
+                    <a href="my-bots.html" class="nav-button">
+                        <i class="fas fa-robot"></i>
+                        המלווים שלי
+                    </a>
+                    <a href="create-bot.html" class="nav-button primary">
+                        <i class="fas fa-plus-circle"></i>
+                        יצירת מלווה למידה חדש
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <section id="bot-details-screen" class="screen active">
+                <div class="bot-details-container">
+                    <div class="bot-header">
+                        <div class="bot-image">
+                            <img src="" alt="תמונת המלווה">
+                        </div>
+                        <div class="bot-info">
+                            <h2 class="bot-name"></h2>
+                            <p class="bot-description"></p>
+                            <div class="bot-meta">
+                                <span class="bot-language"></span>
+                                <span class="bot-voice"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bot-actions">
+                        <button class="action-button primary">
+                            <i class="fas fa-play"></i>
+                            התחל שיחה
+                        </button>
+                        <button class="action-button">
+                            <i class="fas fa-edit"></i>
+                            ערוך
+                        </button>
+                        <button class="action-button danger">
+                            <i class="fas fa-trash"></i>
+                            מחק
+                        </button>
+                    </div>
+
+                    <div class="bot-sections">
+                        <div class="section">
+                            <h3>מקורות מידע</h3>
+                            <div class="sources-list">
+                                <!-- Sources will be populated here -->
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3>הגדרות תרחיש</h3>
+                            <div class="scenario-details">
+                                <!-- Scenario details will be populated here -->
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3>סטטיסטיקות שימוש</h3>
+                            <div class="usage-stats">
+                                <!-- Usage statistics will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Bot Preview -->
+    <div id="bot-preview">
+        <div class="preview-header">
+            <div class="preview-title">שיחה עם המלווה</div>
+            <div class="preview-controls">
+                <button class="minimize-btn">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button class="close-preview">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="preview-content">
+            <!-- Chat messages will be added here -->
+        </div>
+        <div class="preview-input">
+            <input type="text" placeholder="הקלד הודעה..." />
+            <button>
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Common Scripts -->
+    <script src="../js/common/config.js"></script>
+    <script src="../js/common/api.js"></script>
+    <script src="../js/common/utils.js"></script>
+    
+    <!-- Components -->
+    <script src="../js/components/preview.js"></script>
+    
+    <!-- Page Specific Scripts -->
+    <script src="../js/pages/bot-details.js"></script>
+</body>
+</html>
