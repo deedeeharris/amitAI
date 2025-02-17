@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/create-bot.css">
+
+    <link rel="stylesheet" href="../styles/components/data-sources-modal.css">
+    <link rel="stylesheet" href="../styles/components/prompt-generator.css">
+    <link rel="stylesheet" href="../styles/components/bot-preview.css">
+    <link rel="stylesheet" href="../styles/components/file-upload.css">
 </head>
 <body>
     <div class="container">
@@ -41,19 +46,19 @@
                     </div>
                     <div class="step" data-step="2">
                         <span class="step-number">2</span>
-                        <span class="step-title">אישיות המלווה</span>
+                        <span class="step-title">מקורות מידע</span>
                     </div>
                     <div class="step" data-step="3">
                         <span class="step-number">3</span>
-                        <span class="step-title">מקורות מידע</span>
+                        <span class="step-title">אישיות המלווה</span>
                     </div>
                     <div class="step" data-step="4">
                         <span class="step-number">4</span>
-                        <span class="step-title">בדיקה ותצוגה מקדימה</span>
+                        <span class="step-title">תצוגה מקדימה</span>
                     </div>
                     <div class="step" data-step="5">
                         <span class="step-number">5</span>
-                        <span class="step-title">הגדרות והפצה</span>
+                        <span class="step-title">הפצה</span>
                     </div>
                 </div>
 
@@ -64,11 +69,11 @@
                             <h2>פרטים בסיסיים</h2>
                             <div class="form-group">
                                 <label for="bot-name">שם המלווה</label>
-                                <input type="text" id="bot-name" name="bot-name" required>
+                                <input type="text" id="bot-name" name="bot-name">
                             </div>
                             <div class="form-group">
                                 <label for="subject-area">תחום לימוד</label>
-                                <select id="subject-area" name="subject-area" required>
+                                <select id="subject-area" name="subject-area">
                                     <option value="">בחר תחום</option>
                                     <option value="math">מתמטיקה</option>
                                     <option value="science">מדעים</option>
@@ -79,7 +84,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="grade-level">שכבת גיל</label>
-                                <select id="grade-level" name="grade-level" required>
+                                <select id="grade-level" name="grade-level">
                                     <option value="">בחר שכבה</option>
                                     <option value="elementary">יסודי</option>
                                     <option value="middle">חטיבת ביניים</option>
@@ -88,29 +93,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="bot-description">תיאור המלווה</label>
-                                <textarea id="bot-description" name="bot-description" rows="4" required></textarea>
+                                <textarea id="bot-description" name="bot-description" rows="4"></textarea>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Step 2: Personality -->
+                    <!-- Step 2: Data Sources -->
                     <div class="step-content-item" data-step="2">
-                        <div class="form-section">
-                            <h2>אישיות המלווה</h2>
-                            <div class="form-group">
-                                <label for="personality-type">סגנון אישיות</label>
-                                <select id="personality-type" name="personality-type" required>
-                                    <option value="">בחר סגנון</option>
-                                    <option value="friendly">ידידותי ומעודד</option>
-                                    <option value="professional">מקצועי ורשמי</option>
-                                    <option value="casual">קליל ונגיש</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Step 3: Knowledge Sources -->
-                    <div class="step-content-item" data-step="3">
                         <div class="form-section">
                             <h2>מקורות מידע</h2>
                             <div class="form-group">
@@ -124,10 +113,26 @@
                         </div>
                     </div>
 
+                    <!-- Step 3: Personality -->
+                    <div class="step-content-item" data-step="3">
+                        <div class="form-section">
+                            <h2>אישיות המלווה</h2>
+                            <div class="form-group">
+                                <label for="personality-type">סגנון אישיות</label>
+                                <select id="personality-type" name="personality-type">
+                                    <option value="">בחר סגנון</option>
+                                    <option value="friendly">ידידותי ומעודד</option>
+                                    <option value="professional">מקצועי ורשמי</option>
+                                    <option value="casual">קליל ונגיש</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Step 4: Preview -->
                     <div class="step-content-item" data-step="4">
                         <div class="form-section">
-                            <h2>בדיקה ותצוגה מקדימה</h2>
+                            <h2>תצוגה מקדימה</h2>
                             <div class="preview-pane">
                                 <div class="chat-preview">
                                     <!-- Chat preview will be here -->
@@ -139,10 +144,10 @@
                     <!-- Step 5: Deployment -->
                     <div class="step-content-item" data-step="5">
                         <div class="form-section">
-                            <h2>הגדרות והפצה</h2>
+                            <h2>הפצה</h2>
                             <div class="form-group">
                                 <label for="deployment-type">סוג הפצה</label>
-                                <select id="deployment-type" name="deployment-type" required>
+                                <select id="deployment-type" name="deployment-type">
                                     <option value="">בחר סוג הפצה</option>
                                     <option value="website">אתר אינטרנט</option>
                                     <option value="app">אפליקציה</option>
@@ -173,11 +178,12 @@
     </div>
 
     <!-- Scripts -->
-    <script src="../js/debug.js"></script>
-    <script src="../js/wizard-navigation.js"></script>
-    <script src="../js/components/steps.js"></script>
-    <script src="../js/components/file-upload.js"></script>
-    <script src="../js/components/form-validation.js"></script>
-    <script src="../js/pages/create-bot.js"></script>
+    <script type="module" src="../js/debug.js"></script>
+    <script type="module" src="../js/wizard-navigation.js"></script>
+    <script type="module" src="../js/components/steps.js"></script>
+    <script type="module" src="../js/components/file-upload.js"></script>
+    <script type="module" src="../js/components/form-validation.js"></script>
+    <script type="module" src="../js/pages/create-bot.js"></script>
+    <script type="module" src="../js/init.js"></script>
 </body>
 </html>

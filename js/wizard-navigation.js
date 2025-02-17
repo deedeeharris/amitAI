@@ -1,13 +1,63 @@
-// Handle wizard step navigation
-document.addEventListener('DOMContentLoaded', () => {
-    const stepContents = document.querySelectorAll('.step-content-item');
-    const stepIndicators = document.querySelectorAll('.step');
-    const prevBtn = document.querySelector('.prev-step');
-    const nextBtn = document.querySelector('.next-step');
-    let currentStep = 1;
+class WizardNavigation {
+    constructor() {
+        this.stepContents = document.querySelectorAll('.step-content-item');
+        this.stepIndicators = document.querySelectorAll('.step');
+        this.prevBtn = document.querySelector('.prev-step');
+        this.nextBtn = document.querySelector('.next-step');
+        this.currentStep = 1;
+        this.init();
+    }
 
-    function validateCurrentStep() {
-        const currentStepElement = document.querySelector(`.step-content-item[data-step="${currentStep}"]`);
+    init() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.setup());
+        } else {
+            this.setup();
+        }
+    }
+
+    setup() {
+        this.attachEventListeners();
+        this.updateSteps();
+    }
+
+    attachEventListeners() {
+        this.nextBtn.addEventListener('click', () => {
+            if (this.currentStep < 5) {
+                if (this.validateCurrentStep()) {
+                    this.currentStep++;
+                    this.updateSteps();
+                }
+            } else if (this.currentStep === 5) {
+                // Handle form submission
+                if (this.validateCurrentStep()) {
+                    const loadingOverlay = document.querySelector('.loading-overlay');
+                    loadingOverlay.style.display = 'flex';
+                    // TODO: Add form submission logic here
+                }
+            }
+        });
+
+        this.prevBtn.addEventListener('click', () => {
+            if (this.currentStep > 1) {
+                this.currentStep--;
+                this.updateSteps();
+            }
+        });
+
+        // Add step indicator clicks
+        this.stepIndicators.forEach(indicator => {
+            indicator.addEventListener('click', () => {
+                const step = parseInt(indicator.dataset.step);
+                if (step < this.currentStep || this.validateCurrentStep()) {
+                    this.goToStep(step);
+                }
+            });
+        });
+    }
+
+    validateCurrentStep() {
+        const currentStepElement = document.querySelector(`.step-content-item[data-step="${this.currentStep}"]`);
         const requiredFields = currentStepElement.querySelectorAll('[required]');
         let isValid = true;
 
@@ -23,73 +73,44 @@ document.addEventListener('DOMContentLoaded', () => {
         return isValid;
     }
 
-    function updateSteps() {
-        // Update content visibility
-        stepContents.forEach((step, index) => {
-            step.classList.remove('active');
-            if (index + 1 === currentStep) {
+    updateSteps() {
+        // Update step indicators
+        this.stepIndicators.forEach(step => {
+            const stepNum = parseInt(step.dataset.step);
+            step.classList.remove('active', 'completed');
+            
+            if (stepNum === this.currentStep) {
                 step.classList.add('active');
+            } else if (stepNum < this.currentStep) {
+                step.classList.add('completed');
             }
         });
-        
-        // Update indicators
-        stepIndicators.forEach((indicator, index) => {
-            indicator.classList.remove('active', 'completed');
-            if (index + 1 === currentStep) {
-                indicator.classList.add('active');
-            } else if (index + 1 < currentStep) {
-                indicator.classList.add('completed');
+
+        // Update step content visibility
+        this.stepContents.forEach(content => {
+            content.classList.remove('active');
+            if (parseInt(content.dataset.step) === this.currentStep) {
+                content.classList.add('active');
             }
         });
 
         // Update navigation buttons
-        prevBtn.disabled = currentStep === 1;
-        if (currentStep === 5) {
-            nextBtn.innerHTML = 'סיום והפצה <i class="fas fa-check"></i>';
-        } else {
-            nextBtn.innerHTML = 'הבא <i class="fas fa-arrow-left"></i>';
-        }
-    }
-
-    function goToStep(step) {
-        if (step < 1 || step > 5) return;
-        currentStep = step;
-        updateSteps();
-    }
-
-    nextBtn.addEventListener('click', () => {
-        if (currentStep < 5) {
-            if (validateCurrentStep()) {
-                currentStep++;
-                updateSteps();
-            }
-        } else if (currentStep === 5) {
-            // Handle form submission
-            if (validateCurrentStep()) {
-                const loadingOverlay = document.querySelector('.loading-overlay');
-                loadingOverlay.style.display = 'flex';
-                // TODO: Add form submission logic here
-            }
-        }
-    });
-
-    prevBtn.addEventListener('click', () => {
-        if (currentStep > 1) {
-            currentStep--;
-            updateSteps();
-        }
-    });
-
-    // Allow clicking on step indicators to navigate
-    stepIndicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', () => {
-            const targetStep = index + 1;
-            if (targetStep < currentStep || validateCurrentStep()) {
-                goToStep(targetStep);
-            }
+        this.prevBtn.disabled = this.currentStep === 1;
+        this.nextBtn.textContent = this.currentStep === 5 ? 'סיום והפצה <i class="fas fa-check"></i>' : 'הבא <i class="fas fa-arrow-left"></i>';
+        
+        // Emit step change event
+        const event = new CustomEvent('wizardStepChange', {
+            detail: { step: this.currentStep }
         });
-    });
+        document.dispatchEvent(event);
+    }
 
-    // Initialize
-    updateSteps();
-});
+    goToStep(step) {
+        if (step >= 1 && step <= 5) {
+            this.currentStep = step;
+            this.updateSteps();
+        }
+    }
+}
+
+export default WizardNavigation;
