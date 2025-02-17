@@ -8,8 +8,15 @@ class BotPreview {
     }
 
     init() {
-        this.createWidget();
-        this.attachEventListeners();
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.createWidget();
+                this.attachEventListeners();
+            });
+        } else {
+            this.createWidget();
+            this.attachEventListeners();
+        }
     }
 
     createWidget() {
@@ -60,8 +67,15 @@ class BotPreview {
                 </div>
             </div>`;
 
-        document.body.insertAdjacentHTML('beforeend', template);
-        this.container = document.querySelector('.bot-preview-widget');
+        // Create temporary container
+        const temp = document.createElement('div');
+        temp.innerHTML = template;
+        
+        // Get the widget element
+        this.container = temp.firstElementChild;
+        
+        // Append to body
+        document.body.appendChild(this.container);
     }
 
     attachEventListeners() {

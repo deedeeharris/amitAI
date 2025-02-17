@@ -1,7 +1,7 @@
 .bot-preview-widget {
     position: fixed;
     bottom: 20px;
-    left: 20px;
+    right: 20px;
     z-index: 1000;
     font-family: inherit;
 }
@@ -277,13 +277,13 @@
 
 /* RTL Support */
 [dir="rtl"] .bot-preview-widget {
-    left: auto;
-    right: 20px;
+    left: 20px;
+    right: auto;
 }
 
 [dir="rtl"] .preview-window {
-    left: auto;
-    right: 0;
+    left: 0;
+    right: auto;
 }
 
 [dir="rtl"] .user-message {

@@ -3,15 +3,18 @@ import PromptGenerator from './components/prompt-generator.js';
 import BotPreview from './components/bot-preview.js';
 import FileUpload from './components/file-upload.js';
 import WizardNavigation from './wizard-navigation.js';
+import AppearanceSettings from './components/appearance-settings.js';
+import PersonalitySettings from './components/personality-settings.js';
 
 // Initialize components when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize all components
     const dataSourcesModal = new DataSourcesModal();
-    const promptGenerator = new PromptGenerator();
     const botPreview = new BotPreview();
     const fileUpload = new FileUpload();
     const wizardNavigation = new WizardNavigation();
+    const appearanceSettings = new AppearanceSettings();
+    const personalitySettings = new PersonalitySettings();
 
     // Listen for step changes to update component states
     document.addEventListener('wizardStepChange', (event) => {
@@ -22,10 +25,14 @@ document.addEventListener('DOMContentLoaded', () => {
             case 2: // Data Sources
                 dataSourcesModal.activate();
                 break;
-            case 3: // Personality
-                promptGenerator.activate();
+            case 3: // Appearance
+                appearanceSettings.activate();
                 break;
-            case 4: // Preview
+            case 4: // Personality
+                personalitySettings.activate();
+                const promptGenerator = new PromptGenerator();
+                break;
+            case 5: // Preview
                 botPreview.activate();
                 break;
         }
@@ -34,9 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Store components in window for debugging
     window.botComponents = {
         dataSourcesModal,
-        promptGenerator,
         botPreview,
         fileUpload,
-        wizardNavigation
+        wizardNavigation,
+        appearanceSettings,
+        personalitySettings
     };
 });

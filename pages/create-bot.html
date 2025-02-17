@@ -50,15 +50,15 @@
                     </div>
                     <div class="step" data-step="3">
                         <span class="step-number">3</span>
-                        <span class="step-title">אישיות המלווה</span>
+                        <span class="step-title">מראה וקול</span>
                     </div>
                     <div class="step" data-step="4">
                         <span class="step-number">4</span>
-                        <span class="step-title">תצוגה מקדימה</span>
+                        <span class="step-title">אופי ואישיות</span>
                     </div>
                     <div class="step" data-step="5">
                         <span class="step-number">5</span>
-                        <span class="step-title">הפצה</span>
+                        <span class="step-title">תצוגה מקדימה</span>
                     </div>
                 </div>
 
@@ -102,56 +102,149 @@
                     <div class="step-content-item" data-step="2">
                         <div class="form-section">
                             <h2>מקורות מידע</h2>
-                            <div class="form-group">
-                                <label>העלאת קבצים</label>
-                                <div class="upload-zone">
-                                    <i class="fas fa-cloud-upload-alt"></i>
-                                    <p>גרור קבצים לכאן או לחץ להעלאה</p>
-                                    <input type="file" multiple hidden>
+                            <p class="section-description">בחר מקורות מידע עבור המלווה שלך</p>
+                            
+                            <div class="sources-actions">
+                                <button type="button" class="open-sources-library">
+                                    <i class="fas fa-book-open"></i>
+                                    ספריית מקורות
+                                </button>
+                                
+                                <div class="or-divider">או</div>
+
+                                <div class="upload-section">
+                                    <div class="file-upload-zone">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <p>גרור קבצים לכאן או לחץ להעלאה</p>
+                                        <input type="file" multiple class="file-input" accept=".pdf,.doc,.docx,.txt">
+                                    </div>
+                                    <div class="uploaded-files"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Step 3: Personality -->
+                    <!-- Step 3: Appearance and Language -->
                     <div class="step-content-item" data-step="3">
                         <div class="form-section">
-                            <h2>אישיות המלווה</h2>
-                            <div class="form-group">
-                                <label for="personality-type">סגנון אישיות</label>
-                                <select id="personality-type" name="personality-type">
-                                    <option value="">בחר סגנון</option>
-                                    <option value="friendly">ידידותי ומעודד</option>
-                                    <option value="professional">מקצועי ורשמי</option>
-                                    <option value="casual">קליל ונגיש</option>
-                                </select>
+                            <h2>מראה וקול</h2>
+                            <p class="section-description">הגדר את המראה והקול של המלווה שלך</p>
+
+                            <div class="appearance-section">
+                                <div class="form-group">
+                                    <label>תיאור המראה הרצוי</label>
+                                    <textarea 
+                                        class="avatar-description" 
+                                        placeholder="תאר איך תרצה שהמלווה ייראה... למשל: מורה צעירה עם משקפיים ושיער חום קצר"
+                                        rows="3"
+                                    ></textarea>
+                                </div>
+
+                                <div class="avatar-preview">
+                                    <div class="avatar-container">
+                                        <div class="avatar-placeholder">
+                                            <i class="fas fa-user"></i>
+                                            <span>התמונה תופיע כאן</span>
+                                        </div>
+                                        <img src="" alt="Avatar Preview" style="display: none;">
+                                    </div>
+                                    <div class="avatar-actions">
+                                        <button type="button" class="generate-avatar" disabled>
+                                            <i class="fas fa-magic"></i>
+                                            צור תמונה
+                                        </button>
+                                        <button type="button" class="regenerate-avatar" style="display: none">
+                                            <i class="fas fa-redo"></i>
+                                            צור תמונה חדשה
+                                        </button>
+                                        <button type="button" class="approve-avatar" style="display: none">
+                                            <i class="fas fa-check"></i>
+                                            אשר תמונה
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="language-section">
+                                <div class="form-group">
+                                    <label>שפת המלווה</label>
+                                    <select class="bot-language">
+                                        <option value="he">עברית</option>
+                                        <option value="en">אנגלית</option>
+                                        <option value="ar">ערבית</option>
+                                        <option value="ru">רוסית</option>
+                                        <option value="am">אמהרית</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="voice-section">
+                                <div class="form-group">
+                                    <label>קול המלווה</label>
+                                    <div class="voice-options">
+                                        <select class="voice-gender">
+                                            <option value="female">נקבה</option>
+                                            <option value="male">זכר</option>
+                                        </select>
+                                        <select class="voice-age">
+                                            <option value="young">צעיר/ה</option>
+                                            <option value="middle">בוגר/ת</option>
+                                            <option value="elder">מבוגר/ת</option>
+                                        </select>
+                                    </div>
+                                    <div class="voice-preview">
+                                        <button type="button" class="test-voice">
+                                            <i class="fas fa-play"></i>
+                                            נסה את הקול
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Step 4: Preview -->
+                    <!-- Step 4: Personality (previously step 3) -->
                     <div class="step-content-item" data-step="4">
+                        <div class="form-section">
+                            <h2>אופי ואישיות</h2>
+                            <p class="section-description">הגדר את אופי והתנהגות המלווה</p>
+
+                            <div class="personality-section">
+                                <div class="form-group">
+                                    <label>סגנון אישיות</label>
+                                    <select class="personality-style">
+                                        <option value="friendly">ידידותי ונגיש</option>
+                                        <option value="professional">מקצועי ורשמי</option>
+                                        <option value="supportive">תומך ומעודד</option>
+                                        <option value="challenging">מאתגר ודוחף קדימה</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>יצירת פרומפט</label>
+                                    <button type="button" class="open-prompt-chat">
+                                        <i class="fas fa-comments"></i>
+                                        צ'אט ליצירת פרומפט
+                                    </button>
+                                    <div class="prompt-preview">
+                                        <h4>תצוגה מקדימה של הפרומפט</h4>
+                                        <div class="prompt-content">
+                                            <!-- Prompt content will be displayed here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Preview (previously step 4) -->
+                    <div class="step-content-item" data-step="5">
                         <div class="form-section">
                             <h2>תצוגה מקדימה</h2>
                             <div class="preview-pane">
                                 <div class="chat-preview">
                                     <!-- Chat preview will be here -->
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Step 5: Deployment -->
-                    <div class="step-content-item" data-step="5">
-                        <div class="form-section">
-                            <h2>הפצה</h2>
-                            <div class="form-group">
-                                <label for="deployment-type">סוג הפצה</label>
-                                <select id="deployment-type" name="deployment-type">
-                                    <option value="">בחר סוג הפצה</option>
-                                    <option value="website">אתר אינטרנט</option>
-                                    <option value="app">אפליקציה</option>
-                                </select>
                             </div>
                         </div>
                     </div>

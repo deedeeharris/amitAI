@@ -96,7 +96,7 @@ class WizardNavigation {
 
         // Update navigation buttons
         this.prevBtn.disabled = this.currentStep === 1;
-        this.nextBtn.textContent = this.currentStep === 5 ? 'סיום והפצה <i class="fas fa-check"></i>' : 'הבא <i class="fas fa-arrow-left"></i>';
+        this.nextBtn.innerHTML = this.currentStep === 5 ? 'סיום <i class="fas fa-check"></i>' : 'הבא <i class="fas fa-arrow-left"></i>';
         
         // Emit step change event
         const event = new CustomEvent('wizardStepChange', {
