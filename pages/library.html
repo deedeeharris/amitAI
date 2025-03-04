@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ספריית מלווים - מחולל מלווי למידה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/library.css">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <h1>מחולל מלווי למידה - רשת אמית</h1>
+            <nav class="main-nav">
+                <div class="nav-buttons">
+                    <a href="../index.html" class="nav-button">
+                        <i class="fas fa-home"></i>
+                        דף הבית
+                    </a>
+                    <a href="my-bots.html" class="nav-button">
+                        <i class="fas fa-robot"></i>
+                        המלווים שלי
+                    </a>
+                    <a href="create-bot.html" class="nav-button primary">
+                        <i class="fas fa-plus-circle"></i>
+                        יצירת מלווה למידה חדש
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="library-container">
+            <!-- Search and Filters -->
+            <div class="search-section">
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="חיפוש מלווים...">
+                    <button class="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="filters">
+                    <select class="filter-select" id="subject-filter">
+                        <option value="">כל הדיסציפלינות</option>
+                        <option value="math">מתמטיקה</option>
+                        <option value="science">מדעים</option>
+                        <option value="history">היסטוריה</option>
+                        <option value="literature">ספרות</option>
+                        <option value="english">אנגלית</option>
+                    </select>
+                    <select class="filter-select" id="grade-filter">
+                        <option value="">כל השכבות</option>
+                        <option value="7">כיתה ז'</option>
+                        <option value="8">כיתה ח'</option>
+                        <option value="9">כיתה ט'</option>
+                        <option value="10">כיתה י'</option>
+                        <option value="11">כיתה י"א</option>
+                        <option value="12">כיתה י"ב</option>
+                    </select>
+                    <div class="view-toggle">
+                        <button id="grid-view-btn" class="view-btn active" title="תצוגת רשת">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button id="gallery-view-btn" class="view-btn" title="תצוגת גלריה">
+                            <i class="fas fa-images"></i>
+                        </button>
+                    </div>
+                    <div class="favorites-filter">
+                        <label class="favorites-toggle">
+                            <input type="checkbox" id="favorites-only">
+                            <span class="toggle-label">מועדפים בלבד</span>
+                            <i class="fas fa-star"></i>
+                        </label>
+                    </div>
+                    <div class="sort-options">
+                        <label>מיון לפי:</label>
+                        <select id="sort-select">
+                            <option value="newest">חדש ביותר</option>
+                            <option value="popular">פופולרי ביותר</option>
+                            <option value="rating">דירוג</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View Tabs -->
+            <div class="view-tabs">
+                <button class="tab-btn active" data-view="search">תוצאות חיפוש</button>
+                <button class="tab-btn" data-view="gallery">גלריית מלווים</button>
+            </div>
+
+            <!-- Featured Bots (Gallery View) -->
+            <div class="featured-bots" id="featured-bots" style="display: none;">
+                <h2 class="section-title">מלווים מומלצים</h2>
+                <div class="featured-grid">
+                    <!-- Featured bots will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <!-- Categories (Gallery View) -->
+            <div class="bot-categories" id="bot-categories" style="display: none;">
+                <h2 class="section-title">קטגוריות</h2>
+                <div class="categories-grid">
+                    <!-- Categories will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <!-- Bot Grid (Search Results) -->
+            <div class="bot-grid" id="bot-grid">
+                <!-- Bots will be dynamically inserted here -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="page-button" id="prev-page">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="page-numbers" id="page-numbers">
+                    <!-- Page numbers will be dynamically inserted here -->
+                </div>
+                <button class="page-button" id="next-page">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Bot Preview Modal -->
+    <div id="bot-preview-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="bot-preview-name"></h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="chat-container">
+                    <div class="chat-messages"></div>
+                    <div class="chat-input">
+                        <input type="text" placeholder="הקלד הודעה...">
+                        <button class="send-message">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/common/config.js"></script>
+    <script src="../js/common/api.js"></script>
+    <script src="../js/common/utils.js"></script>
+    <script src="../js/components/botCard.js"></script>
+    <script src="../js/pages/library.js"></script>
+</body>
+</html>

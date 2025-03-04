@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחולל מלווי למידה - רשת אמית</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .welcome-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .welcome-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .main-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .action-card {
+            background: var(--surface-color);
+            border-radius: var(--border-radius-md);
+            padding: 1.25rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .action-card i {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary-color);
+        }
+
+        .action-card.create {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .action-card.create i {
+            color: white;
+        }
+
+        .action-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .action-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .action-card.create .action-description {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Center the main header */
+        .main-header {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .main-header h1 {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-container {
+                margin: 1.5rem auto;
+                padding: 1rem;
+            }
+
+            .welcome-title {
+                font-size: 1.75rem;
+            }
+
+            .main-actions {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .action-card {
+                padding: 1rem;
+            }
+            
+            .action-card i {
+                font-size: 1.75rem;
+            }
+        }
+        
+        /* Responsive layout for tablets */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .main-actions {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+            
+            .action-card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <h1>מחולל מלווי למידה - רשת אמית</h1>
+        </header>
+
+        <main class="welcome-container">
+            <h1 class="welcome-title">ברוכים הבאים למחולל מלווי הלמידה</h1>
+            <p class="welcome-subtitle">צרו, נהלו וגלו מלווי למידה חכמים המותאמים לצרכים שלכם</p>
+
+            <div class="main-actions">
+                <a href="pages/library.html" class="action-card">
+                    <i class="fas fa-book-open"></i>
+                    <h2 class="action-title">ספריית מלווים</h2>
+                    <p class="action-description">גלו מלווי למידה מוכנים לשימוש</p>
+                </a>
+
+                <a href="pages/my-bots.html" class="action-card">
+                    <i class="fas fa-robot"></i>
+                    <h2 class="action-title">המלווים שלי</h2>
+                    <p class="action-description">נהלו את מלווי הלמידה שיצרתם</p>
+                </a>
+
+                <a href="pages/create-bot.html" class="action-card create">
+                    <i class="fas fa-plus-circle"></i>
+                    <h2 class="action-title">צור מלווה חדש</h2>
+                    <p class="action-description">צרו מלווה למידה מותאם אישית</p>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/common/config.js"></script>
+    <script src="js/common/api.js"></script>
+    <script src="js/common/utils.js"></script>
+    <script src="js/components/botCard.js"></script>
+    <script src="js/pages/library.js"></script>
+</body>
+</html>
+

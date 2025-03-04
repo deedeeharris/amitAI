@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Green Avatar</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="avatarGradient">
+            <stop stop-color="#4CAF50" offset="0%"></stop>
+            <stop stop-color="#1B5E20" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle fill="url(#avatarGradient)" cx="100" cy="100" r="100"></circle>
+        <g transform="translate(50, 60)" fill="#FFFFFF">
+            <!-- Head -->
+            <circle cx="50" cy="30" r="30"></circle>
+            <!-- Body -->
+            <path d="M0,70 C0,50 100,50 100,70 L100,120 C100,140 0,140 0,120 L0,70Z"></path>
+            <!-- Tie -->
+            <path d="M50,60 L40,80 L50,100 L60,80 L50,60" fill="#E0E0E0" stroke="#FFFFFF" stroke-width="1"></path>
+        </g>
+    </g>
+</svg> 

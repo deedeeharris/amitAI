@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>יצירת מלווה למידה</title>
+    <link rel="stylesheet" href="../styles/create-bot.css">
+    <link rel="stylesheet" href="../styles/modal-buttons.css">
+</head>
+<body>
+    <!-- Mobile Warning Overlay -->
+    <div class="mobile-warning">
+        <div class="mobile-warning-content">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                <rect x="9" y="9" width="6" height="6"></rect>
+                <line x1="9" y1="1" x2="9" y2="4"></line>
+                <line x1="15" y1="1" x2="15" y2="4"></line>
+                <line x1="9" y1="20" x2="9" y2="23"></line>
+                <line x1="15" y1="20" x2="15" y2="23"></line>
+                <line x1="20" y1="9" x2="23" y2="9"></line>
+                <line x1="20" y1="14" x2="23" y2="14"></line>
+                <line x1="1" y1="9" x2="4" y2="9"></line>
+                <line x1="1" y1="14" x2="4" y2="14"></line>
+            </svg>
+            <h2>גישה למחשב בלבד</h2>
+            <p>כלי זה דורש מחשב שולחני לשימוש. אנא גש לאתר ממחשב.</p>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <a href="../index.html" class="back-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </a>
+                <div class="gpt-info">
+                    <div class="gpt-avatar-small">
+                        <div class="gpt-avatar-small-inner"></div>
+                    </div>
+                    <div>
+                        <div class="gpt-title">מלווה למידה חדש</div>
+                        <div class="gpt-status">• טיוטה</div>
+                    </div>
+                </div>
+            </div>
+            
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Chat Preview (Left Side) -->
+            <div class="chat-preview">
+                <div class="preview-header">
+                    תצוגה מקדימה
+                </div>
+                <div class="chat-messages">
+                    <!-- Messages will be added here by JavaScript -->
+                </div>
+                    <div class="chat-input-container">
+                        <div class="chat-input">
+                        <input type="text" placeholder="הקלד הודעה...">
+                            <button class="send-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                </svg>
+                            </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wizard (Right Side) -->
+            <div class="form-container">
+                <div class="wizard-container">
+                    <!-- Wizard Tabs -->
+                    <div class="wizard-tabs">
+                        <div class="wizard-tab active" data-step="1">
+                            <div class="wizard-tab-number">1</div>
+                            <span>מידע בסיסי</span>
+                        </div>
+                        <div class="wizard-tab inactive" data-step="2">
+                            <div class="wizard-tab-number">2</div>
+                            <span>מקורות מידע</span>
+                        </div>
+                        <div class="wizard-tab inactive" data-step="3">
+                            <div class="wizard-tab-number">3</div>
+                            <span>מראה ושפה</span>
+                        </div>
+                        <div class="wizard-tab inactive" data-step="4">
+                            <div class="wizard-tab-number">4</div>
+                            <span>אישיות</span>
+                        </div>
+                        <div class="wizard-tab inactive" data-step="5">
+                            <div class="wizard-tab-number">5</div>
+                            <span>סיום</span>
+                        </div>
+                    </div>
+
+                    <!-- Step Content -->
+                    <div class="step-content">
+                        <!-- Step 1: Basic Information -->
+                        <div class="step-content-item" id="step-1">
+                            <h2 class="step-title">מידע בסיסי</h2>
+                            <p class="step-description">הגדר את המידע הבסיסי של המלווה שלך</p>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="bot-name">שם המלווה</label>
+                                <input type="text" id="bot-name" class="form-input" placeholder="שם המלווה">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="discipline">דיסציפלינה</label>
+                                    <select id="discipline" class="form-select">
+                                        <option value="">בחר דיסציפלינה</option>
+                                        <option value="math">מתמטיקה</option>
+                                        <option value="science">מדעים</option>
+                                        <option value="history">היסטוריה</option>
+                                        <option value="literature">ספרות</option>
+                                        <option value="english">אנגלית</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="grade-level">שכבה</label>
+                                    <select id="grade-level" class="form-select">
+                                        <option value="">בחר שכבה</option>
+                                        <option value="7">כיתה ז'</option>
+                                        <option value="8">כיתה ח'</option>
+                                        <option value="9">כיתה ט'</option>
+                                        <option value="10">כיתה י'</option>
+                                        <option value="11">כיתה י"א</option>
+                                        <option value="12">כיתה י"ב</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="conversation-mode">מצב שיחה</label>
+                                    <select id="conversation-mode" class="form-select">
+                                        <option value="new">שיחה חדשה בכל פעם</option>
+                                        <option value="continue">המשך שיחה קודמת</option>
+                                    </select>
+                                </div>
+                        </div>
+                        
+                            <div class="form-group">
+                                <label class="form-label" for="bot-description">תיאור המלווה</label>
+                                <textarea id="bot-description" class="form-textarea" rows="4" placeholder="תיאור זה יופי בגלריה"></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 2: Data Sources -->
+                        <div class="step-content-item" id="step-2" style="display: none;">
+                            <h2 class="step-title">מקורות מידע</h2>
+                            <p class="step-description">הגדר את מקורות המידע שישמשו את המלווה</p>
+                            
+                            <div class="form-group">
+                                <div class="toggle-container">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="internet-toggle">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <label class="form-label" for="internet-toggle">חיבור לאינטרנט</label>
+                                </div>
+                                <div class="form-help">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                    </svg>
+                                    <span>אפשר למלווה לחפש מידע באינטרנט בזמן אמת</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group compact-group">
+                                <div class="form-row library-buttons-row">
+                                    <div class="form-group">
+                                        <button class="sources-library-button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                                            </svg>
+                                            ספריית מקורות
+                                        </button>
+                                        <div class="form-help">בחר מקורות מידע מאורגנים לפי דיסציפלינה</div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <button class="sources-library-button lessons-library-button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                            </svg>
+                                            ספריית שיעורים
+                                        </button>
+                                        <div class="form-help">בחר שיעורים מתוך ה-LMS</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Selected Sources Container -->
+                            <div class="form-group" id="selected-sources-container" style="display: none;">
+                                <label class="form-label">מקורות שנבחרו</label>
+                                <div class="selected-items-list" id="selected-sources-list">
+                                    <!-- Selected sources will be displayed here -->
+                                </div>
+                            </div>
+
+                            <!-- Selected Lessons Container -->
+                            <div class="form-group" id="selected-lessons-container" style="display: none;">
+                                <label class="form-label">שיעורים שנבחרו</label>
+                                <div class="selected-items-list" id="selected-lessons-list">
+                                    <!-- Selected lessons will be displayed here -->
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">העלאת קבצים</label>
+                                <div class="compact-upload">
+                                    <button class="upload-button" id="compact-file-upload-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="17 8 12 3 7 8"></polyline>
+                                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                                        </svg>
+                                        העלאת קובץ
+                                    </button>
+                                    <div id="file-upload-container"></div>
+                                </div>
+                            </div>
+                            
+    
+                        </div>
+                        
+                        <!-- Step 3: Appearance and Language -->
+                        <div class="step-content-item" id="step-3" style="display: none;">
+                            <h2 class="step-title">מראה ושפה</h2>
+                            <p class="step-description">הגדר את המראה והשפה של המלווה</p>
+                            
+                            <div class="form-group">
+                                <div class="avatar-tabs">
+                                    <div class="avatar-tab active" data-tab="generate">יצירת תמונה</div>
+                                    <div class="avatar-tab" data-tab="upload">העלאת תמונה</div>
+                                </div>
+                                
+                                <div class="avatar-tab-content active" id="tab-generate">
+                                    <div id="avatar-preview">
+                                        <img src="../assets/images/placeholder-avatar.svg" alt="Default Avatar" class="selected-avatar">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="avatar-description">תיאור הדמות</label>
+                                        <textarea id="avatar-description" class="form-textarea" rows="2" placeholder="תאר את הדמות שתרצה ליצור, למשל: 'מורה צעירה עם משקפיים ושיער חום קצר'"></textarea>
+                                    </div>
+                                    <div class="avatar-actions">
+                                        <button class="generate-image-button">צור תמונה</button>
+                                        <button class="generate-new-image-button" style="display: none;">צור תמונה חדשה</button>
+                                        <button class="approve-image-button" style="display: none;">אשר תמונה</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="avatar-tab-content" id="tab-upload" style="display: none;">
+                                    <div id="avatar-upload-container"></div>
+                                    <div id="avatar-upload-preview"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="bot-language">שפת המלווה</label>
+                                    <select id="bot-language" class="form-select">
+                                        <option value="he">עברית</option>
+                                        <option value="en">אנגלית</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="voice-gender">מגדר הקול</label>
+                                    <select class="form-select" id="voice-gender">
+                                        <option value="female">נקבה</option>
+                                        <option value="male">זכר</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="voice-type">קול</label>
+                                    <select class="form-select" id="voice-type">
+                                        <option value="he-IL-AvriNeural">אברי (Avri)</option>
+                                        <option value="he-IL-HilaNeural">הילה (Hila)</option>
+                                        <option value="en-US-AriaNeural">אריה (Aria - אנגלית)</option>
+                                        <option value="en-US-GuyNeural">גיא (Guy - אנגלית)</option>
+                                        <option value="en-US-JennyNeural">ג'ני (Jenny - אנגלית)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <button class="test-voice-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
+                                    נסה את הקול
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 4: Personality -->
+                        <div class="step-content-item" id="step-4" style="display: none;">
+                            <h2 class="step-title">אישיות</h2>
+                            <p class="step-description">הגדר את האישיות וההתנהגות של המלווה</p>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="bot-role">תפקיד המלווה</label>
+                                <textarea id="bot-role" class="form-textarea" rows="3" placeholder="תאר את התפקיד הכללי של המלווה, למשל: 'מלווה למידה שעוזר לתלמידים להבין מושגים מתמטיים'"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <button class="prompt-chat-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                    </svg>
+                                    יצירת פרומפט מותאם אישית
+                                </button>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="system-prompt">הנחיות מערכת</label>
+                                <textarea id="system-prompt" class="form-textarea" rows="6" placeholder="כאן יופיע הפרומפט שנוצר. ניתן לערוך אותו לפי הצורך."></textarea>
+                            </div>
+                </div>
+
+                        <!-- Step 5: Preview and Finalization -->
+                        <div class="step-content-item" id="step-5" style="display: none;">
+                            <h2 class="step-title">סיום</h2>
+                            <p class="step-description">סיכום המלווה שלך</p>
+                            
+                            <div class="bot-summary">
+                                <div class="summary-header">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="8" y1="6" x2="21" y2="6"></line>
+                                        <line x1="8" y1="12" x2="21" y2="12"></line>
+                                        <line x1="8" y1="18" x2="21" y2="18"></line>
+                                        <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                        <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                        <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                                    </svg>
+                                    <h3>סיכום המלווה</h3>
+                                </div>
+                                
+                                <div class="summary-section">
+                                    <h4>מידע בסיסי</h4>
+                                    <div class="summary-item">
+                                        <span class="summary-label">שם המלווה:</span>
+                                        <span class="summary-value" id="summary-bot-name">-</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">דיסציפלינה:</span>
+                                        <span class="summary-value" id="summary-discipline">-</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">שכבה:</span>
+                                        <span class="summary-value" id="summary-grade">-</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">מצב שיחה:</span>
+                                        <span class="summary-value" id="summary-conversation-mode">-</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">תיאור:</span>
+                                        <span class="summary-value" id="summary-description">-</span>
+                                    </div>
+                    </div>
+
+                                <div class="summary-section">
+                                    <h4>מקורות מידע</h4>
+                                    <div class="summary-item">
+                                        <span class="summary-label">חיבור לאינטרנט:</span>
+                                        <span class="summary-value" id="summary-internet">-</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">מקורות שנבחרו:</span>
+                                        <div class="summary-value" id="summary-sources">-</div>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">שיעורים שנבחרו:</span>
+                                        <div class="summary-value" id="summary-lessons">-</div>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">קבצים שהועלו:</span>
+                                        <div class="summary-value" id="summary-files">-</div>
+                                    </div>
+                    </div>
+
+                                <div class="summary-section">
+                                    <h4>מראה ושפה</h4>
+                                    <div class="summary-item">
+                                        <span class="summary-label">אווטאר:</span>
+                                        <div class="summary-avatar">
+                                            <img id="summary-avatar-img" src="../assets/images/placeholder-avatar.svg" alt="Avatar">
+                                        </div>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">שפה:</span>
+                                        <span class="summary-value" id="summary-language">-</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">מגדר קול:</span>
+                                        <span class="summary-value" id="summary-voice-gender">-</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">סוג קול:</span>
+                                        <span class="summary-value" id="summary-voice-type">-</span>
+                                    </div>
+                    </div>
+
+                                <div class="summary-section">
+                                    <h4>אישיות</h4>
+                                    <div class="summary-item">
+                                        <span class="summary-label">תפקיד המלווה:</span>
+                                        <span class="summary-value" id="summary-bot-role">-</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">פרומפט מערכת:</span>
+                                        <div class="summary-value system-prompt-preview" id="summary-system-prompt">-</div>
+                                    </div>
+                                </div>
+                    </div>
+
+                            <div class="completion-message">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                                <h3>המלווה שלך מוכן!</h3>
+                                <p>תוכל לבדוק את המלווה בצד שמאל לפני יצירה.</p>
+                            </div>
+                            
+                            <div class="final-actions">
+                                <button class="create-button-large">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                    </svg>
+                                    יצירת מלווה
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step Navigation -->
+                    <div class="step-navigation">
+                        <button class="prev-step-button" disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M15 18l-6-6 6-6"/>
+                            </svg>
+                            הקודם
+                        </button>
+                        <button class="next-step-button">
+                            הבא
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="../js/pages/wizard-navigation.js"></script>
+    <script src="../js/pages/preview-chat-sidebar.js"></script>
+    <script src="../js/pages/file-upload.js"></script>
+    <script src="../js/pages/avatar-upload.js"></script>
+    <script src="../js/pages/form-validation.js"></script>
+    <script src="../js/pages/create-bot.js"></script>
+    
+    <!-- Sources Library Modal -->
+    <div class="modal" id="sources-library-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>ספריית מקורות</h3>
+                <button class="close-modal-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="sources-search" placeholder="חפש מקורות...">
+                    <button class="search-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="filter-container">
+                    <select id="discipline-filter" class="filter-select">
+                        <option value="">כל הדיסציפלינות</option>
+                        <option value="math">מתמטיקה</option>
+                        <option value="science">מדעים</option>
+                        <option value="history">היסטוריה</option>
+                        <option value="literature">ספרות</option>
+                        <option value="english">אנגלית</option>
+                    </select>
+                </div>
+                
+                <div class="sources-list" id="sources-list">
+                    <!-- Sources will be populated here dynamically -->
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
+                        <p>טוען מקורות...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="cancel-button btn-large">ביטול</button>
+                <button class="apply-button btn-large" id="add-selected-sources">הוסף מקורות</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Lessons Library Modal -->
+    <div class="modal" id="lessons-library-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>ספריית שיעורים</h3>
+                <button class="close-modal-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="lessons-search" placeholder="חפש שיעורים...">
+                    <button class="search-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="filter-container">
+                    <select id="grade-filter" class="filter-select">
+                        <option value="">כל השכבות</option>
+                        <option value="7">כיתה ז'</option>
+                        <option value="8">כיתה ח'</option>
+                        <option value="9">כיתה ט'</option>
+                        <option value="10">כיתה י'</option>
+                        <option value="11">כיתה י"א</option>
+                        <option value="12">כיתה י"ב</option>
+                    </select>
+                </div>
+                
+                <div class="lessons-list" id="lessons-list">
+                    <!-- Lessons will be populated here dynamically -->
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
+                        <p>טוען שיעורים...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="cancel-button">ביטול</button>
+                <button class="apply-button" id="add-selected-lessons">הוסף שיעורים</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prompt Chat Modal -->
+    <div class="modal" id="prompt-chat-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>יצירת פרומפט מותאם אישית</h3>
+                <button class="close-modal-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="chat-container">
+                    <div class="chat-messages" id="prompt-chat-messages">
+                        <!-- Chat messages will be added here dynamically -->
+                    </div>
+                    <div class="chat-input-container">
+                        <div class="chat-input">
+                            <input type="text" id="prompt-chat-input" placeholder="הקלד הודעה...">
+                            <button class="send-button" id="prompt-chat-send">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="cancel-button">ביטול</button>
+                <button class="apply-button" id="apply-system-prompt">אישור פרומפט</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

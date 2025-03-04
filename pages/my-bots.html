@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>המלווים שלי - מחולל מלווי למידה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/my-bots.css">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <h1>מחולל מלווי למידה - רשת אמית</h1>
+            <nav class="main-nav">
+                <div class="nav-buttons">
+                    <a href="./library.html" class="nav-button">
+                        <i class="fas fa-book-open"></i>
+                        ספריית מלווי למידה
+                    </a>
+                    <a href="my-bots.html" class="nav-button active">
+                        <i class="fas fa-robot"></i>
+                        המלווים שלי
+                    </a>
+                    <a href="create-bot.html" class="nav-button primary">
+                        <i class="fas fa-plus-circle"></i>
+                        יצירת מלווה למידה חדש
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <section id="my-bots-screen" class="screen active">
+                <div class="my-bots-list">
+                    <!-- Will be populated dynamically -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Common Scripts -->
+    <script src="../js/common/config.js"></script>
+    <script src="../js/common/api.js"></script>
+    <script src="../js/common/utils.js"></script>
+    
+    <!-- Page Specific Scripts -->
+    <script src="../js/pages/my-bots.js"></script>
+</body>
+</html>
