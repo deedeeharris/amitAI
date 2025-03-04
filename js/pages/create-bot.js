@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize preview chat sidebar
     const previewChatSidebar = new PreviewChatSidebar();
+    previewChatSidebar.init();
     
     // Initialize file upload
     const fileUpload = new FileUpload('file-upload-container', {
